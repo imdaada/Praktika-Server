@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS user_app
+(
+    login VARCHAR(200) PRIMARY KEY,
+    firstname VARCHAR(200) NOT NULL,
+    role VARCHAR(200) NOT NULL,
+    surname VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS task
+(
+    id INTEGER PRIMARY KEY,
+
+);
