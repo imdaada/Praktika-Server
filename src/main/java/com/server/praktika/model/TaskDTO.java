@@ -1,50 +1,12 @@
 package com.server.praktika.model;
 
-import com.sun.istack.Nullable;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "task")
-public class Task {
-    @Id
-    @Column(name = "id")
-    @SequenceGenerator(name = "taskIdSeq", sequenceName = "task_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
-    private Integer id;
-
-    //@Column(name = "student_login")
-    @ManyToOne()
-    @JoinColumn(name = "login_student")
+public class TaskDTO {
     private UserApp studentLogin;
-
-    ///@Column(name = "teacher_login")
-    @ManyToOne()
-    @JoinColumn(name = "login_teacher")
     private UserApp teacherLogin;
-
-    @Column(name = "text_of_task")
     private String textOfTask;
-
-    @Nullable
-    @Column(name = "is_taken")
     private Boolean isTaken;
-
-    @Nullable
-    @Column(name = "answer_on_task")
     private String answerOnTask;
-
-    @Nullable
-    @Column(name = "feedback")
     private String feedback;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public UserApp getStudentLogin() {
         return studentLogin;

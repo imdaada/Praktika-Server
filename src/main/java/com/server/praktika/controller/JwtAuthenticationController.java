@@ -53,4 +53,9 @@ public class JwtAuthenticationController {
         }
         return ResponseEntity.badRequest().body("Логин уже занят");
     }
+
+    @GetMapping("/role")
+    public ResponseEntity<?> getUserRole (@RequestHeader("Authorization") String jwt) {
+        return ResponseEntity.ok(userDetailsService.getRole(jwt));
+    }
 }

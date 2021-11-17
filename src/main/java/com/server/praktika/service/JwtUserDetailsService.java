@@ -1,5 +1,6 @@
 package com.server.praktika.service;
 
+import com.server.praktika.config.JwtTokenUtil;
 import com.server.praktika.model.UserApp;
 import com.server.praktika.model.UserAppDTO;
 import com.server.praktika.repository.UserRepository;
@@ -16,9 +17,11 @@ import java.util.ArrayList;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    PasswordEncoder bcryptEncoder;
+    private PasswordEncoder bcryptEncoder;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,5 +48,20 @@ public class JwtUserDetailsService implements UserDetailsService {
         userApp.setRole(userAppDTO.getRole());
         userApp.setSurname(userAppDTO.getSurname());
         return userRepository.save(userApp);
+    }
+
+    public String getRole(String jwtBearer) {
+        String jwt = jwtBearer.substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(jwt);
+        UserApp userApp = userRepository.findByLogin(username);
+        if (userApp == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+        return userApp.getRole();
+    }
+
+    public String getLogin(String jwtBearer) {
+        String jwt = jwtBearer.substring(7);
+        return jwtTokenUtil.getUsernameFromToken(jwt);
     }
 }
