@@ -56,6 +56,9 @@ public class JwtAuthenticationController {
 
     @GetMapping("/role")
     public ResponseEntity<?> getUserRole (@RequestHeader("Authorization") String jwt) {
-        return ResponseEntity.ok(userDetailsService.getRole(jwt));
+        UserAppDTO userAppDTO = new UserAppDTO();
+        String role = userDetailsService.getRole(jwt);
+        userAppDTO.setRole(role);
+        return ResponseEntity.ok().body(userAppDTO);
     }
 }

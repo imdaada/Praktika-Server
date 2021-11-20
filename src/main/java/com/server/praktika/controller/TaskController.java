@@ -36,7 +36,7 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public ResponseEntity<?> deleteTask(@RequestBody Task task, @RequestHeader("Authorization") String jwt) {
         Collection<Task> tasks = userRepository.findByLogin(jwtUserDetailsService.getLogin(jwt)).getEmittedTasks();
         Iterator<Task> iteratorTask = tasks.iterator();
@@ -44,7 +44,7 @@ public class TaskController {
             Task nextTask = iteratorTask.next();
             if (task.getId().equals(nextTask.getId())) {
                 taskRepository.delete(nextTask);
-                return ResponseEntity.ok("Deleted");
+                return ResponseEntity.ok(new Task());
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

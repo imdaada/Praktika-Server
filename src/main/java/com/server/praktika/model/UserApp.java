@@ -1,5 +1,7 @@
 package com.server.praktika.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -23,9 +25,11 @@ public class UserApp {
     private String surname;
 
     @OneToMany(mappedBy = "studentLogin")
+    @JsonIgnore
     private Collection<Task> takenTasks;
 
     @OneToMany(mappedBy = "teacherLogin")
+    @JsonIgnore
     private Collection<Task> emittedTasks;
 
     public String getLogin() {
