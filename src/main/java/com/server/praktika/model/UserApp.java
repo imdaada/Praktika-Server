@@ -24,13 +24,27 @@ public class UserApp {
     @Column(name = "surname")
     private String surname;
 
-    @OneToMany(mappedBy = "studentLogin")
-    @JsonIgnore
-    private Collection<Task> takenTasks;
+    @Column(name = "email")
+    private String email;
 
     @OneToMany(mappedBy = "teacherLogin")
+    private Collection<Task> createdTasks;
+
+    @OneToMany(mappedBy = "teacherLogin")
+    private Collection<CurrentTask> emittedTasks;
+
+    @OneToMany(mappedBy = "teacherLogin")
+    private Collection<Group> groups;
+
+    @OneToMany(mappedBy = "studentLogin")
+    private Collection<CurrentTask> takenTasks;
+
+    @OneToMany(mappedBy = "owner")
+    private Collection<TaskFile> files;
+
+    @OneToMany(mappedBy = "studentLogin")
     @JsonIgnore
-    private Collection<Task> emittedTasks;
+    private Collection<GroupRecord> groupRecords;
 
     public String getLogin() {
         return login;
@@ -72,19 +86,59 @@ public class UserApp {
         this.surname = surname;
     }
 
-    public Collection<Task> getTakenTasks() {
-        return takenTasks;
+    public Collection<Task> getCreatedTasks() {
+        return createdTasks;
     }
 
-    public void setTakenTasks(Collection<Task> takenTasks) {
-        this.takenTasks = takenTasks;
+    public void setCreatedTasks(Collection<Task> createdTasks) {
+        this.createdTasks = createdTasks;
     }
 
-    public Collection<Task> getEmittedTasks() {
+    public Collection<TaskFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(Collection<TaskFile> files) {
+        this.files = files;
+    }
+
+    public Collection<CurrentTask> getEmittedTasks() {
         return emittedTasks;
     }
 
-    public void setEmittedTasks(Collection<Task> emittedTasks) {
+    public void setEmittedTasks(Collection<CurrentTask> emittedTasks) {
         this.emittedTasks = emittedTasks;
+    }
+
+    public Collection<CurrentTask> getTakenTasks() {
+        return takenTasks;
+    }
+
+    public void setTakenTasks(Collection<CurrentTask> takenTasks) {
+        this.takenTasks = takenTasks;
+    }
+
+    public Collection<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        this.groups = groups;
+    }
+
+    public Collection<GroupRecord> getGroupRecords() {
+        return groupRecords;
+    }
+
+    public void setGroupRecords(Collection<GroupRecord> groupRecords) {
+        this.groupRecords = groupRecords;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
+    /*
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
     @Autowired
@@ -90,4 +91,6 @@ public class TaskController {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+    */
+
 }

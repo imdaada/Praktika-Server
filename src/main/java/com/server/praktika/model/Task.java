@@ -1,8 +1,11 @@
 package com.server.praktika.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "task")
@@ -13,30 +16,38 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
     private Integer id;
 
-    //@Column(name = "student_login")
-    @ManyToOne()
-    @JoinColumn(name = "login_student")
-    private UserApp studentLogin;
-
     ///@Column(name = "teacher_login")
     @ManyToOne()
     @JoinColumn(name = "login_teacher")
+    @JsonIgnore
     private UserApp teacherLogin;
 
     @Column(name = "text_of_task")
     private String textOfTask;
 
-    @Nullable
-    @Column(name = "is_taken")
-    private Boolean isTaken;
+    @Column(name = "date_create")
+    private Date dateCreate;
 
-    @Nullable
-    @Column(name = "answer_on_task")
-    private String answerOnTask;
+    @Column(name = "name_task")
+    private String taskName;
 
-    @Nullable
-    @Column(name = "feedback")
-    private String feedback;
+    @Column(name = "task_subject")
+    private String taskSubject;
+
+    @OneToMany(mappedBy = "taskId")
+    private Collection<TaskFile> attachedFiles;
+
+    @OneToMany(mappedBy = "taskId")
+    @JsonIgnore
+    private Collection<CurrentTask> currentTasks;
+
+    public Collection<CurrentTask> getCurrentTasks() {
+        return currentTasks;
+    }
+
+    public void setCurrentTasks(Collection<CurrentTask> currentTasks) {
+        this.currentTasks = currentTasks;
+    }
 
     public Integer getId() {
         return id;
@@ -44,14 +55,6 @@ public class Task {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public UserApp getStudentLogin() {
-        return studentLogin;
-    }
-
-    public void setStudentLogin(UserApp studentLogin) {
-        this.studentLogin = studentLogin;
     }
 
     public UserApp getTeacherLogin() {
@@ -70,27 +73,36 @@ public class Task {
         this.textOfTask = textOfTask;
     }
 
-    public Boolean getTaken() {
-        return isTaken;
+    public Date getDateCreate() {
+        return dateCreate;
     }
 
-    public void setTaken(Boolean taken) {
-        isTaken = taken;
+    public void setDateCreate(Date dateCreate) {
+        this.dateCreate = dateCreate;
     }
 
-    public String getAnswerOnTask() {
-        return answerOnTask;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public void setAnswerOnTask(String answerOnTask) {
-        this.answerOnTask = answerOnTask;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
-    public String getFeedback() {
-        return feedback;
+    public String getTaskSubject() {
+        return taskSubject;
     }
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
+    public void setTaskSubject(String taskSubject) {
+        this.taskSubject = taskSubject;
     }
+
+    public Collection<TaskFile> getAttachedFiles() {
+        return attachedFiles;
+    }
+
+    public void setAttachedFiles(Collection<TaskFile> attachedFiles) {
+        this.attachedFiles = attachedFiles;
+    }
+
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/userApp")
 public class UserAppController {
-    @Autowired
+    /*@Autowired
     private UserRepository userRepository;
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
@@ -26,4 +26,5 @@ public class UserAppController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+     */
 }

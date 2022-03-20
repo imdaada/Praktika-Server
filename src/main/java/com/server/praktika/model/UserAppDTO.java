@@ -6,6 +6,7 @@ public class UserAppDTO {
     private String role;
     private String firstName;
     private String surname;
+    private String email;
 
     public String getLogin() {
         return login;
@@ -45,5 +46,13 @@ public class UserAppDTO {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
