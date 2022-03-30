@@ -1,5 +1,6 @@
 package com.server.praktika.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -37,5 +38,13 @@ public class GroupRecord implements Serializable {
 
     public void setStudentLogin(UserApp studentLogin) {
         this.studentLogin = studentLogin;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

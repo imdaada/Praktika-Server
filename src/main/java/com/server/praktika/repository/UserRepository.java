@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserApp, String> {
     UserApp findByLogin(String firstName);
-    List<UserApp> findFirst50ByLoginIsStartingWith(String login);
+    List<UserApp> findFirst50ByLoginIsStartingWithAndRole(String login, String role);
 }

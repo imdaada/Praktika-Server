@@ -29,6 +29,9 @@ public class TaskFile {
     @Column(name = "link")
     private String link;
 
+    @Column(name = "f_name")
+    private String name;
+
     @ManyToOne()
     @JoinColumn(name = "owner")
     @JsonIgnore
@@ -74,5 +77,11 @@ public class TaskFile {
         this.owner = owner;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

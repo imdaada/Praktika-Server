@@ -40,13 +40,14 @@ public class JwtUserDetailsService implements UserDetailsService {
                 new ArrayList<>());
     }
 
-    public UserApp save(UserAppDTO userAppDTO) {
+    public UserApp save(UserApp userAppDTO) {
         UserApp userApp = new UserApp();
         userApp.setFirstName(userAppDTO.getFirstName());
         userApp.setLogin(userAppDTO.getLogin());
         userApp.setPassword(bcryptEncoder.encode(userAppDTO.getPassword()));
         userApp.setRole(userAppDTO.getRole());
         userApp.setSurname(userAppDTO.getSurname());
+        userApp.setEmail(userAppDTO.getEmail());
         return userRepository.save(userApp);
     }
 

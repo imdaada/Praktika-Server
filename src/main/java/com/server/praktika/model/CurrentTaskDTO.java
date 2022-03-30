@@ -3,63 +3,24 @@ package com.server.praktika.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.Nullable;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
-@Entity
-@Table(name = "current_task")
-public class CurrentTask {
-    @Id
-    @Column(name = "id")
-    @SequenceGenerator(name = "currentTaskIdSeq", sequenceName = "current_task_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "currentTaskIdSeq")
+public class CurrentTaskDTO {
     private Integer id;
-
-    @ManyToOne()
-    @JoinColumn(name = "task_id")
     private Task taskId;
-
-    @Column(name = "date_of_give")
     private Date dateOfGive;
-
-    @Column(name = "date_of_change")
     private Date dateOfLastChange;
-
-    @Column(name = "is_closed")
     private boolean isClosed;
-
-    @Column(name = "is_taken")
     private boolean isTaken;
-
-    @Nullable
-    @Column(name = "answer_on_task")
     private String answerOnTask;
-
-    @Nullable
-    @Column(name = "feedback")
     private String feedback;
-
-    @Nullable
-    @Column(name = "limit_date")
     private Date limitDate;
-
-    @ManyToOne()
-    @JoinColumn(name = "student_login")
-    @JsonIgnore
     private UserApp studentLogin;
-
-    @ManyToOne()
-    @JoinColumn(name = "teacher_login")
-    @JsonIgnore
     private UserApp teacherLogin;
-
-    @Nullable
-    @Column(name = "is_grade")
     private boolean isGrade;
-
-    @OneToMany(mappedBy = "currentTaskId")
-    private Collection<TaskFile> attachedFiles;
 
     public Integer getId() {
         return id;
@@ -155,13 +116,5 @@ public class CurrentTask {
 
     public void setGrade(boolean grade) {
         isGrade = grade;
-    }
-
-    public Collection<TaskFile> getAttachedFiles() {
-        return attachedFiles;
-    }
-
-    public void setAttachedFiles(Collection<TaskFile> attachedFiles) {
-        this.attachedFiles = attachedFiles;
     }
 }
